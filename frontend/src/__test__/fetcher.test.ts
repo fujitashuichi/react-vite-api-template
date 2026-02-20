@@ -1,3 +1,7 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { ApiService } from "../api";
+import { apiDataMocks } from "../__mock__/apiData.mock";
+
 // Input:
 /* props: FetcherProps<dataType> =
     | { method: "GET",    query: string }
@@ -12,29 +16,73 @@
     | { ok: true, value: unknown }
 */
 
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiService } from "../api";
 
 const service = ApiService();
 
 describe("fetcher", () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
-        new Response(
-            JSON.stringify({ name: "Taro" }),
-            { status: 200 }
-        )
-    );
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
 
-    it ("GET成功時 → ok: true", async () => {
+    it ("GET成功時は ok: true を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.successWithData());
+
         const result = await service.fetchApi({
             method: "GET",
             query: "/api/test"
         });
-
         expect(result.ok).toBe(true);
     });
 
-    afterEach(() => {
-        vi.restoreAllMocks();
-    })
+    it ("GET失敗時は ok: false を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.error());
+
+        const result = await service.fetchApi({
+            method: "GET",
+            query: "/api/test"
+        });
+        expect(result.ok).toBe(false);
+    });
+
+    it ("POST成功時は ok: true を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.successWithData());
+
+        const result = await service.fetchApi({
+            method: "POST",
+            query: "/api/test/id",
+            data: { id: 123, name: "Alex" }
+        });
+        expect(result.ok).toBe(true);
+    });
+
+    it ("POST失敗時は ok: false を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.error());
+
+        const result = await service.fetchApi({
+            method: "POST",
+            query: "/api/test/id",
+            data: { id: 987, name: "Eli" }
+        });
+        expect(result.ok).toBe(false);
+    });
+
+    it ("DELETE成功時は ok: true を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.successWithoutData());
+
+        const result = await service.fetchApi({
+            method: "DELETE",
+            query: "/api/test/id"
+        });
+        expect(result.ok).toBe(true);
+    });
+
+    it ("DELETE失敗時は ok: false を返す", async () => {
+        vi.spyOn(globalThis, "fetch").mockResolvedValue(apiDataMocks.error());
+
+        const result = await service.fetchApi({
+            method: "DELETE",
+            query: "/api/test/id"
+        });
+        expect(result.ok).toBe(false);
+    });
 });

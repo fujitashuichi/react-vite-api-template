@@ -14,7 +14,7 @@ export const ApiService = () => {
             body: fetchOptionBody(props)
         });
 
-        return shapedData(response);
+        return shapedData(props.method, response);
     }
 
 
@@ -22,13 +22,20 @@ export const ApiService = () => {
 }
 
 
-const shapedData = async (res: Promise<Response>): Promise<ApiFetcherResponse> => {
+const shapedData = async (method: "GET" | "POST" | "PUT" | "DELETE" ,res: Promise<Response>): Promise<ApiFetcherResponse> => {
     const data = await res;
     if (!data.ok) {
         const errorText = data.statusText ?? data.text ?? "unknown Error: No errorTexts in response";
         return {
             ok: false,
             error: new Error(errorText)
+        }
+    }
+
+    if (method === "DELETE") {
+        return {
+            ok: true,
+            value: undefined
         }
     }
 

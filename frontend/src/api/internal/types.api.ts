@@ -5,9 +5,8 @@ export type FetcherProps =
     | { method: "DELETE", query: string }
 
 export type ApiDataType = {
-    exampleId: number,
-    exampleName: string,
-    examplePrice: number
+    id: number,
+    name: string
 }
 
 export type ApiFetcherResponse =
