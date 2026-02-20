@@ -1,12 +1,9 @@
-import type { ApiDataType, ApiFetcherResponse, FetcherProps } from "./types.api"
+import type { ApiFetcherResponse, FetcherProps } from "./internal";
 
-// You should only change the Type: ApiDataType
-type dataType = ApiDataType;
+export const ApiService = () => {
+    // Rename the function to fetchUsers, fetchProducts, fetchStudents, etc.
 
-// Then rename the function to fetchUsers, fetchProducts, fetchStudents, etc.
-
-export const fetcher = () => {
-    const fetchApi = (props: FetcherProps<dataType>): Promise<ApiFetcherResponse> => {
+    const fetchApi = (props: FetcherProps): Promise<ApiFetcherResponse> => {
         const fetchUrl = `https://domain/api/${props.query}`;
 
         const response = fetch(fetchUrl, {
@@ -41,7 +38,7 @@ const shapedData = async (res: Promise<Response>): Promise<ApiFetcherResponse> =
     }
 }
 
-const fetchOptionBody = (props: FetcherProps<dataType>) => {
+const fetchOptionBody = (props: FetcherProps) => {
     switch (props.method) {
         case "GET":
             return undefined;

@@ -1,4 +1,4 @@
-export type FetcherProps<ApiDataType> =
+export type FetcherProps =
     | { method: "GET",    query: string }
     | { method: "POST",   query: string, data: ApiDataType }
     | { method: "PUT",    query: string, data: ApiDataType }
