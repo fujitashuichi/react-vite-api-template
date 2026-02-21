@@ -25,7 +25,7 @@ export const ApiService = () => {
 const shapedData = async (method: "GET" | "POST" | "PUT" | "DELETE" ,res: Promise<Response>): Promise<ApiFetcherResponse> => {
     const data = await res;
     if (!data.ok) {
-        const errorText = data.statusText ?? data.text ?? "unknown Error: No errorTexts in response";
+        const errorText = data.statusText ?? "unknown error: fetch failed";
         return {
             ok: false,
             error: new Error(errorText)
