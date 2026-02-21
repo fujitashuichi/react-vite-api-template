@@ -1,4 +1,3 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiService } from "../api";
 import { apiDataMocks } from "../__mock__/apiData.mock";
 
