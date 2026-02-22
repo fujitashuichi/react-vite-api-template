@@ -1,4 +1,4 @@
-import type { ApiFetcherResponse, FetcherProps } from "./internal";
+import type { ApiFetcherResponse, FetcherProps } from "../internal";
 
 export const ApiService = () => {
     // Rename the function to fetchUsers, fetchProducts, fetchStudents, etc.

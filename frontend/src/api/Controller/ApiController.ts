@@ -1,8 +1,8 @@
 // Controller is intended to handle validation, business logic, and state interpretation.
 //  You may continue using this as a class or refactor it into simple functions as needed.
 
-import { ApiService } from "./ApiService";
-import { ApiDataSchema, type ApiDataType, type ApiDataWithStatus } from "./internal";
+import { ApiService } from "../Service/ApiService";
+import { ApiDataSchema, type ApiDataType, type ApiDataWithStatus } from "../internal";
 
 
 export class ApiController {

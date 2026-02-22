@@ -1,4 +1,4 @@
-import { ApiService } from "../ApiService"
+import { ApiService } from "../Service/ApiService"
 import type { ApiContextType, ApiDataType, FetcherProps } from "./types.api"
 
 
