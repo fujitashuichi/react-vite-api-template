@@ -15,7 +15,7 @@ export const useApiData = () => {
     if (data.status !== "success") {
         throw new Error("useApiData can only be used when status is 'success'");
     }
-    return data;
+    return data.value;
 }
 
 export const useFetchApi = () => {
